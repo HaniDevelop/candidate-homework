@@ -1,4 +1,31 @@
-﻿<!DOCTYPE html>
+﻿<style>
+    .navbar {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-image: linear-gradient(147deg,rgba(31,38,54,0.79) 0%,rgba(255,72,1,0.28) 100%),linear-gradient(rgba(0,0,0,0.06),rgba(0,0,0,0.06));
+        border-bottom-color: rgb(255,72,1);
+        border-bottom-width: 20px;
+        border-bottom-style: solid;
+    }
+    .navbar li {
+        float:left;
+    }
+        .navbar li a {
+            display: block;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            font-family: "Calibri Regular";
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+    .navbar li:hover {
+        background-color: rgb(255,72,1);
+    }
+</style>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,7 +33,13 @@
     <title>@ViewBag.Title - Sockeye Consulting</title>
     @Styles.Render("~/Content/css")
 </head>
+
 <body>
+    <ul class="navbar">
+        <li> @Html.ActionLink("Home", "Index", "Home")</li>
+        <li> @Html.ActionLink("Simple List", "SimpleAnagramsList", "AnagramList")</li>
+        <li> @Html.ActionLink("Harder List", "HarderAnagramsList", "AnagramList")</li>
+    </ul>
     <div>
         @RenderBody()
     </div>

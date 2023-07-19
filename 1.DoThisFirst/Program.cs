@@ -30,7 +30,25 @@ namespace _1.WarmUp.Easy
 
             // YOUR CODE GOES HERE :)
 
-
+            for (int i = 1; i <= 100; i++)
+            {
+                if (i % 3 == 0 && i % 5 == 0)
+                {
+                    Console.WriteLine("Sockeye Consulting");
+                }
+                else if (i % 3 == 0)
+                {
+                    Console.WriteLine("Sockeye");
+                }
+                else if (i % 5 == 0)
+                {
+                    Console.WriteLine("Consulting");
+                }
+                else
+                {
+                    Console.WriteLine(i);
+                }
+            }
 
             Console.WriteLine("\r\n\r\nCompleted -- Press any key to quit");
 

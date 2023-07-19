@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace _2.Puzzle.Medium
 {
@@ -57,14 +59,14 @@ namespace _2.Puzzle.Medium
 
             foreach (var list in Output(Resource.SimpleList))
             {
-                Console.WriteLine(string.Join(",", list));
+                Console.WriteLine(string.Join(", ", list));
             }
 
             Console.WriteLine("\r\n\r\nSimpleList complete.\r\n");
 
             foreach (var list in Output(Resource.HarderList))
             {
-                Console.WriteLine(string.Join(",", list));
+                Console.WriteLine(string.Join(", ", list));
             }
 
             Console.WriteLine("\r\n\r\nHarderList complete.\r\n\r\n");
@@ -77,7 +79,55 @@ namespace _2.Puzzle.Medium
 
             // YOUR CODE GOES HERE
 
+            //remove duplicates, remove empty/whitespace strings, clean leading/trailing whitespace, sort alphabetically
+            List<string> cleanInput = input.Distinct().ToList();
+            cleanInput.RemoveAll(string.IsNullOrWhiteSpace);
+            cleanInput = cleanInput.Select(s => s.Trim()).ToList();
+            cleanInput.Sort();
+
+            while (cleanInput.Count != 0)
+            {
+                List<string> list = new List<string>();
+                list.Add(cleanInput[0]);
+                string compare = cleanInput[0];
+                cleanInput.RemoveAt(0);
+
+                for (int i = 0; i < cleanInput.Count; i++)
+                {
+                    if (IsAnagram(compare, cleanInput[i]))
+                    {
+                        list.Add((string)cleanInput[i]);
+                        cleanInput.RemoveAt(i);
+                    }
+                }
+                output.Add(list);
+            }
             return output;
+        }
+
+        static bool IsAnagram(string str1, string str2)
+        {
+            str1 = str1.ToLower();
+            str2 = str2.ToLower();
+
+            if (str1.Length != str2.Length)
+            {
+                return false;
+            }
+
+            List<char> remainingChars = new List<char>();
+            remainingChars.AddRange(str2);
+
+            for (int i = 0; i < str1.Length; i++)
+            {
+                //if we are unable to remove the char from remainingChars, it means it doesn't exist and the strings are not anagrams
+                if (!remainingChars.Remove(str1[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

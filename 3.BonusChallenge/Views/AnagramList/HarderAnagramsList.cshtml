@@ -1,0 +1,41 @@
+﻿@model _3.BonusChallenge.Models.AnagramList
+
+@{
+    ViewBag.Title = "Harder Anagrams List";
+}
+<style>
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .anagram-list {
+        display: inline;
+        list-style: none;
+        padding: 0px;
+    }
+
+        .anagram-list li {
+            display: inline;
+        }
+
+            .anagram-list li::after {
+                content: ', ';
+            }
+
+            .anagram-list li:last-child:after {
+                content: "";
+            }
+</style>
+<div class="center">
+    @foreach (var list in Model.Output.ToList())
+    {
+        <ul class="anagram-list">
+            @foreach (var word in list)
+            {
+                <li>@word</li>
+            }
+        </ul>
+        <br />
+    }
+</div>
